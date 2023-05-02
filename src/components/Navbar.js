@@ -1,11 +1,13 @@
 import React from 'react';
 import "../styles/Navbar.css"
+import { Link } from "react-router-dom";
 import accountImage from "../assets/account.png";
 import forkImage from "../assets/forkImage.png";
 import wishlistImage from "../assets/wishList.png";
 import cartImage from "../assets/cartImage.png";
 import menuIcon from "../assets/whiteMenu.png";
 import Banner from './ImageContainer';
+import Dummy from './Dummy';
 
 const Navbar = () => {
 
@@ -26,10 +28,12 @@ const Navbar = () => {
                     <a href='https://www.linkedin.com/in/navneetkumar22/' target='blank'><p className='email'>linkedin.com/navneetkumar</p></a>
                     <p className='offer'>Free Shipping for all orders above <b> &#8377;299</b></p>
                 </div>
-                <div className='header-second'>
-                    <img src={accountImage} alt='account' />
-                    <p>Login</p>
-                </div>
+                <Link to="/login">
+                    <div className='header-second'>
+                        <img src={accountImage} alt='account' />
+                        <p>Login</p>
+                    </div>
+                </Link>
             </section>
 
             {/* navigation section  */}
@@ -90,6 +94,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </section>
+            <Dummy/>
         </>
     )
 }
