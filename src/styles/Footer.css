@@ -1,0 +1,90 @@
+.footer {
+    margin-top: 100px;
+    height: 265px;
+    background-color: darkcyan;
+    padding: 70px 60px;
+}
+
+.footer-box {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-bottom: 2px solid white;
+    padding-bottom: 40px;
+    color: white;
+}
+
+.logo-div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-div h2 {
+    letter-spacing: 2px;
+}
+
+.logo-image img {
+    height: 60px;
+}
+
+.address {
+    line-height: 23px;
+}
+
+.link-items ul {
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.link-items li:hover {
+    font-weight: bold;
+}
+
+.emailus p {
+    color: whitesmoke;
+}
+
+.email-input {
+    margin-top: 40px;
+    border: 1px solid white;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.email-input input {
+    width: 100%;
+    padding: 15px 10px;
+    border: none;
+}
+
+.email-input input::placeholder {
+    font-size: 16px;
+    color: gray;
+}
+
+.email-input button {
+    padding: 12px 20px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 0px 3px 3px 0px;
+    font-size: medium;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.love {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    gap: 30px;
+    padding: 20px 0px;
+}
+
+.love p:first-child {
+    border-right: 2px solid white;
+    padding-right: 30px;
+}
