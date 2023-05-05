@@ -13,7 +13,7 @@ const Signup = () => {
                 </div>
                 <div className='login-nav-div'>
                     <ul>
-                        <li>HOME</li>
+                        <Link to="/"><li>HOME</li></Link>
                         <li>SHOP</li>
                         <li>ABOUT US</li>
                         <li>CATALOGUE</li>
