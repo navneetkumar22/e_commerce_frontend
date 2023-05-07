@@ -1,8 +1,15 @@
 import React from 'react';
+import { useLocation } from "react-router-dom";
 import "../styles/Footer.css";
 import footerLogo from "../assets/logoImage2.png";
 
 const Footer = () => {
+
+    const { pathname } = useLocation();
+    if (pathname === "/admin") return null;
+
+
+
     return (
         <section className='footer'>
             <div className='footer-box'>

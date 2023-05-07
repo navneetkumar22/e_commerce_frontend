@@ -1,0 +1,44 @@
+.header {
+    height: 35px;
+    background-color: lightgray;
+    padding: 5px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-first {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.offer {
+    border-left: 2px solid #858383;
+    padding-left: 30px;
+    font-size: 13px;
+}
+
+.email {
+    color: #0076b5;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+a {
+    text-decoration: none;
+}
+
+.header-second {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: black;
+}
+
+.header-second img {
+    height: 21px;
+}

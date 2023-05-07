@@ -1,0 +1,57 @@
+.grid-container {
+    justify-content: space-around;
+    width: 80vw;
+    margin: 80px auto;
+    display: grid;
+    gap: 60px;
+    grid-template-columns: repeat(4, auto);
+}
+
+.dummy {
+    height: 100px;
+    width: 100px;
+    background-color: darkcyan;
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
+
+.reveal {
+    position: relative;
+    transform: translateY(150px);
+    opacity: 0;
+    transition: 2s all ease;
+}
+
+.reveal.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* products section*/
+.products {
+    margin-top: 100px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.collection-div ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.collection-div ul li {
+    list-style: none;
+    padding: 5px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.selected {
+    background-color: darkcyan;
+    color: white;
+    font-weight: bold;
+}
