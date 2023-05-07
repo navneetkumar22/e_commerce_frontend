@@ -1,0 +1,101 @@
+/* navigation section  */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 60px;
+}
+
+.store {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.store img {
+    height: 50px;
+}
+
+.nav-div ul {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.nav-div ul li {
+    list-style: none;
+    cursor: pointer;
+    color: black;
+}
+
+.nav-div ul li:hover {
+    transform: scale(1.1);
+    color: darkcyan;
+}
+
+.extra-div {
+    width: 100px;
+}
+
+/* admin section  */
+
+.admin-panel {
+    width: 300px;
+    margin: auto;
+    padding: 10px 0px;
+    background-color: darkcyan;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 7px -1px gray;
+}
+
+.admin-section {
+    margin-top: 20px;
+    padding: 30px 60px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.panel {
+    border-radius: 4px;
+    background-color: white;
+    height: 50vh;
+    width: 14vw;
+    padding: 20px 40px;
+    box-shadow: -1px 1px 7px -1px gray;
+}
+
+.panel-items {
+    margin-top: 40px;
+}
+
+.panel-items p {
+    font-weight: 500;
+    margin: 20px 0px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.selected {
+    background-color: darkcyan;
+    padding: 6px 15px;
+    color: white;
+    border-radius: 4px 0px 0px 4px;
+    scroll-behavior: smooth;
+}
+
+.panel-contents {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 1px 1px 7px -1px gray;
+    width: 70vw;
+    padding: 10px 20px;
+}
