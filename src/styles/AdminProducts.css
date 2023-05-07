@@ -1,0 +1,85 @@
+.admin-products {
+    padding: 20px;
+}
+
+.admin-products h2 {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    border-bottom: 2px solid darkgray;
+    padding-bottom: 10px;
+}
+
+table {
+    width: 63vw;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: medium;
+}
+
+td {
+    color: #212121;
+}
+
+/* tbody tr.userview {
+    /* height: 20px; */
+/* box-shadow: 0 0 2px #212121; */
+/* } */
+
+.edit-btn {
+    background-color: #0a480a;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    color: white;
+    border: none;
+    margin: 7px 0px;
+    font-size: 14px;
+}
+
+.edit-btn:hover {
+    background-color: #0f6b0f;
+}
+
+.delete-btn {
+    background-color: #691c1c;
+    padding: 5px 18px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+    color: white;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #a52929;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+.add-collection {
+    width: 300px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.add-collection button {
+    background-color: #09887b;
+    padding: 8px 16px;
+    font-size: 14px;
+    border: none;
+    border-radius: 3px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 1px 1px 3px 2px darkgray;
+}
+
+.add-collection button:active {
+    box-shadow: none;
+}

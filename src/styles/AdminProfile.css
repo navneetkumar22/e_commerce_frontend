@@ -1,0 +1,49 @@
+.profile{
+    padding: 10px;
+}
+
+.profile h2{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    border-bottom: 2px solid darkgray;
+    padding-bottom: 10px;
+}
+
+.pic{
+    height: 80px;
+    width: 120px;
+    margin: 30px auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 7px -1px gray;
+    background-color: lightgray;
+}
+
+.profile-details{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.profile-details p{
+    color: #494f55;
+}
+
+.edit-profile{
+    text-align: center;
+    margin: 30px auto;
+}
+
+.profile button{
+    width: 150px;
+    background-color: #2d9ca0;
+    border: none;
+    color: white;
+    font-size: small;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 3px;
+    cursor: pointer;
+}
