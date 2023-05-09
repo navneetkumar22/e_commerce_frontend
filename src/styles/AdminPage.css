@@ -99,3 +99,10 @@
     width: 70vw;
     padding: 10px 20px;
 }
+
+/* handle non-admin component  */
+
+.non-admin {
+    margin-top: 100px;
+    text-align: center;
+}

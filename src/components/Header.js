@@ -34,7 +34,7 @@ const Header = () => {
                             Cookies.remove('token');
                             Cookies.remove('name');
                             Cookies.remove('role');
-                            window.alert(result.message)
+                            // window.alert(result.message)
                             navigate('/');
                         }
                     })
@@ -60,7 +60,11 @@ const Header = () => {
                         {userRole === "admin" ? (
                             <Link to="/admin"><p>Dashboard</p></Link>
                         ) : (
-                            <Link to="/profile"><p>Profile</p></Link>
+                            <>
+                                <Link to="/profile"><p>Profile</p></Link>
+                                <Link to="/wishlist"><p>WishList</p></Link>
+                                <Link to="/cart"><p>Cart</p></Link>
+                            </>
                         )}
                         <p onClick={logoutUser}>Logout</p>
                     </div>
