@@ -42,3 +42,33 @@ a {
 .header-second img {
     height: 21px;
 }
+
+.dropdown-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* position: relative; */
+}
+
+#drop-down{
+    z-index: 999;
+    height: 80px;
+    padding: 0px 30px;
+    text-align: center;
+    display: none;
+    background-color: lightgray;
+    position: absolute;
+    top: 35px;
+    right: 60px;
+    border-radius: 0px 0px 3px 3px;
+}
+
+#drop-down p{
+    cursor: pointer;
+    color: black;
+    font-size: 14px;
+}
+#drop-down p:hover{
+    font-weight: bold;
+}
