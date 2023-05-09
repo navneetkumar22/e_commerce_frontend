@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/AdminCollections.css";
+import axios from 'axios';
 
 const AdminCollections = () => {
 
     const [collections, setCollections] = useState();
+
+    const getAllCollections = async () => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/collections`)
+                .then(response => { return response.data })
+                .then((result) => { setCollections(result.collections) })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     //Edit the user
     const handleEdit = async (id) => {
@@ -14,6 +26,10 @@ const AdminCollections = () => {
     const handleDelete = async (userId) => {
         //
     }
+
+    useEffect(() => {
+        getAllCollections();
+    })
 
     return (
         <section className="collection-data">
@@ -30,11 +46,11 @@ const AdminCollections = () => {
                             </tr>
                         </thead>
                         <tbody id="tbody">
-                            {collections && collections.map((user) => (
+                            {collections && collections.map((collection) => (
                                 <tr className="userview">
-                                    <td>{user.name}</td>
-                                    <td><button className="edit-btn" onClick={() => { handleEdit(user._id) }}>Edit</button></td>
-                                    <td><button className="delete-btn" onClick={() => { handleDelete(user._id) }}>Delete</button></td>
+                                    <td>{collection.name}</td>
+                                    <td><button className="edit-btn" onClick={() => { handleEdit(collection._id) }}>Edit</button></td>
+                                    <td><button className="delete-btn" onClick={() => { handleDelete(collection._id) }}>Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>
@@ -49,4 +65,4 @@ const AdminCollections = () => {
     )
 }
 
-export default AdminCollections
+export default AdminCollections;

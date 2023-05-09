@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/AdminOrders.css";
+import axios from 'axios';
 
 const AdminOrders = () => {
 
   const [orders, setOrders] = useState();
+
+  const allOrders = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/order/all`, { withCredentials: true })
+        .then(response => { return response.data })
+        .then((result) => { setOrders(result.orders); })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //Edit the user
   const handleEdit = async (id) => {
@@ -14,6 +25,10 @@ const AdminOrders = () => {
   const handleDelete = async (userId) => {
     //
   }
+
+  useEffect(() => {
+    allOrders();
+  })
 
   return (
     <section className="user-data">

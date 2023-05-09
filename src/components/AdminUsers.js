@@ -1,9 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/AdminUsers.css";
+import axios from 'axios';
 
 const AdminUsers = () => {
 
   const [users, setUsers] = useState();
+
+  const fetchUsers = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/users`, { withCredentials: true })
+        .then(response => { return response.data })
+        .then((result) => { setUsers(result.users); })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //Edit the user
   const handleEdit = async (id) => {
@@ -14,6 +25,10 @@ const AdminUsers = () => {
   const handleDelete = async (userId) => {
     //
   }
+
+  useEffect(() => {
+    fetchUsers();
+  })
 
   return (
     <section className="user-data">
@@ -36,7 +51,7 @@ const AdminUsers = () => {
                 <tr className="userview">
                   <td>{user.name}</td>
                   <td>{user.email}</td>
-                  <td>{user.orders.length}</td>
+                  <td>0</td>
                   <td><button className="edit-btn" onClick={() => { handleEdit(user._id) }}>Edit</button></td>
                   <td><button className="delete-btn" onClick={() => { handleDelete(user._id) }}>Delete</button></td>
                 </tr>

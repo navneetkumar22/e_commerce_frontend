@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/AdminProducts.css";
+import axios from 'axios';
 
 const AdminProducts = () => {
   const [products, setProducts] = useState();
+
+  const getProducts = async () => {
+    try {
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/all`)
+        .then(response => { return response.data })
+        .then((result) => { setProducts(result.products) })
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //Edit the user
   const handleEdit = async (id) => {
@@ -14,6 +25,9 @@ const AdminProducts = () => {
     //
   }
 
+  useEffect(() => {
+    getProducts();
+  })
 
   return (
     <section className="collection-data">
