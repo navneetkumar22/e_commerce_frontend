@@ -1,0 +1,80 @@
+.new-product {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 1px 1px 7px -1px gray;
+    width: 70vw;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.product-headline {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+    border-bottom: 2px solid lightgray;
+    padding-bottom: 10px;
+}
+
+.product-form form {
+    padding: 50px 100px;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 30px;
+}
+
+.product-form form h4 {
+    background-color: lightgray;
+    text-align: center;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+
+
+.product-form form input {
+    /* width: auto; */
+    padding: 10px;
+    background-color: lightgray;
+    border: none;
+    font-size: small;
+    border-radius: 3px;
+}
+
+.product-form form input[type='file'] {
+    width: 60%;
+    padding: 25px;
+    background-color: transparent;
+    text-align: center;
+}
+
+.product-form form input::placeholder {
+    text-align: center;
+    color: black;
+    font-size: small;
+}
+
+.product-btn {
+    width: 200px;
+    margin: 20px auto;
+}
+
+.product-btn button {
+    padding: 8px 80px;
+    font-size: medium;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: darkcyan;
+    color: white;
+    font-weight: 600;
+}
+
+.product-form form p{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.product-form form p label{
+    font-weight: bold;
+}
