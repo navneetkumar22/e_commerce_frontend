@@ -41,8 +41,38 @@
 }
 
 .cart-div img {
-    height: 22px;
+    height: 28px;
     cursor: pointer;
+}
+
+.wish-size {
+    position: relative;
+}
+
+.wish-length {
+    position: absolute;
+    background-color: darkcyan;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 7px;
+    right: -18px;
+    top: -25px;
+}
+
+.cart-size {
+    position: relative;
+}
+
+.cart-length {
+    position: absolute;
+    background-color: darkcyan;
+    color: white;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 7px;
+    right: -18px;
+    top: -25px;
 }
 
 /* search section  */

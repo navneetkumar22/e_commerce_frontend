@@ -1,6 +1,7 @@
-import React, {} from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import forkImage from "../assets/forkImage.png";
 import wishlistImage from "../assets/wishList.png";
 import cartImage from "../assets/cartImage.png";
@@ -9,6 +10,38 @@ import Banner from './ImageContainer';
 import Categories from './Categories';
 
 const Home = () => {
+
+    const [cart, setCart] = useState();
+    const [wishlist, setWishlist] = useState();
+
+    const getWishlist = async () => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/wishlist`, { withCredentials: true })
+                .then(response => { setWishlist(response.data.wishList) })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getCart = async () => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, { withCredentials: true })
+                .then(response => { setCart(response.data.cart) })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const [collections, setCollections] = useState();
+
+    const getAllCollection = async () => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/collections`)
+                .then(response => { setCollections(response.data.collections) })
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const productSection = () => {
         const proDuct = document.getElementById('product-box');
@@ -24,6 +57,12 @@ const Home = () => {
         }
 
     }
+
+    useEffect(() => {
+        getAllCollection();
+        getWishlist();
+        getCart();
+    })
 
     return (
         <>
@@ -43,8 +82,14 @@ const Home = () => {
                     </ul>
                 </div>
                 <div className='cart-div'>
-                    <img src={wishlistImage} alt='wishlist' />
-                    <img src={cartImage} alt='cart' />
+                    <div className='wish-size'>
+                        <img src={wishlistImage} alt='wishlist' />
+                        <p className='wish-length'>{wishlist ? (wishlist.products.length) : (0)}</p>
+                    </div>
+                    <div className='cart-size'>
+                        <img src={cartImage} alt='cart' />
+                        <p className='cart-length'>{cart ? (cart.products.length) : (0)}</p>
+                    </div>
                 </div>
             </section>
 
@@ -58,16 +103,9 @@ const Home = () => {
                     </div>
                     <div className='collection-list'>
                         <ul>
-                            <li>Fresh Fruits</li>
-                            <li>Fresh Vegetables</li>
-                            <li>Organic Foods</li>
-                            <li>Dried Foods</li>
-                            <li>Drink Fruits</li>
-                            <li>Groceries</li>
-                            <li>Jaggery</li>
-                            <li>Rice</li>
-                            <li>Turmeric Powder</li>
-                            <li>Jaggery Powder</li>
+                            {collections && collections.map((collection) => (
+                                <li onClick={productSection} key={collection._id}>{collection.name}</li>
+                            ))}
                         </ul>
                     </div>
                 </div>

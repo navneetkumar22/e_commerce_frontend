@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../styles/Categories.css";
+import axios from 'axios';
+import ProductCard from './ProductCard';
 
 const Categories = () => {
 
-    const [selectedLink, setSelectedLink] = useState("Fresh Fruits");
+    const [collections, setCollections] = useState();
+    const [selectedLink, setSelectedLink] = useState();
+    const [products, setProducts] = useState();
 
-    const handleClick = (event) => {
-        event.preventDefault();
-        setSelectedLink(event.target.textContent);
+    const getAllCollection = async () => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/collections`)
+                .then(response => { setCollections(response.data.collections) })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const getProducts = async (id, productName) => {
+        try {
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/collection/${id}`)
+                .then(response => { setProducts(response.data.products) })
+        } catch (error) {
+            console.log(error);
+        }
+        setSelectedLink(productName);
     }
 
     function reveal() {
@@ -15,7 +33,7 @@ const Categories = () => {
         for (let i = 0; i < reveals.length; i++) {
             let elementTop = reveals[i].getBoundingClientRect().top;
 
-            if (elementTop < window.innerHeight - 150) {
+            if (elementTop < window.innerHeight - 50) {
                 reveals[i].classList.add("active");
             } else {
                 reveals[i].classList.remove("active");
@@ -25,6 +43,10 @@ const Categories = () => {
 
     window.addEventListener("scroll", reveal);
 
+    useEffect(() => {
+        getAllCollection();
+    })
+
     return (
         <section className='product-section'>
             <div className="products">
@@ -32,26 +54,16 @@ const Categories = () => {
             </div>
             <div className='collection-div'>
                 <ul>
-                    <li className={selectedLink === "Fresh Fruits" ? "selected" : ""} onClick={handleClick}>Fresh Fruits</li>
-                    <li className={selectedLink === "Organic Fruits" ? "selected" : ""} onClick={handleClick}>Organic Fruits</li>
-                    <li className={selectedLink === "Natural Vegatables" ? "selected" : ""} onClick={handleClick}>Natural Vegatables</li>
-                    <li className={selectedLink === "Fresh Juices" ? "selected" : ""} onClick={handleClick}>Fresh Juices</li>
-                    <li className={selectedLink === "Dried Fruits" ? "selected" : ""} onClick={handleClick}>Dried Fruits</li>
+                    {collections && collections.map((collection) => (
+                        <li className={selectedLink === `${collection.name}` ? "selected" : ""} onClick={() => getProducts(collection._id, collection.name)} key={collection._id}>{collection.name}</li>
+                    ))}
                 </ul>
             </div>
+
             <div className="grid-container">
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
-                <div className="dummy reveal">this is a Dummy card</div>
+                {products && products.map((product) => (
+                    <ProductCard data={product} key={product._id} />
+                ))}
             </div>
         </section>
     )

@@ -3,22 +3,13 @@
     width: 80vw;
     margin: 80px auto;
     display: grid;
-    gap: 60px;
-    grid-template-columns: repeat(4, auto);
-}
-
-.dummy {
-    height: 100px;
-    width: 100px;
-    background-color: darkcyan;
-    text-align: center;
-    padding: 10px;
-    color: white;
+    gap: 50px;
+    grid-template-columns: repeat(3, auto);
 }
 
 .reveal {
     position: relative;
-    transform: translateY(150px);
+    transform: translateY(80px);
     opacity: 0;
     transition: 2s all ease;
 }
