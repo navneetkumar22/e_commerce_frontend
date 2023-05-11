@@ -1,5 +1,10 @@
 .admin-products {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* margin-top: 20px; */
 }
 
 .admin-products h2 {
@@ -82,4 +87,9 @@ button:active {
 
 .add-collection button:active {
     box-shadow: none;
+}
+
+.product-pic{
+    height: 50px;
+    margin: 10px 0px;
 }

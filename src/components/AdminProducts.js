@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminProducts.css";
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+// import AdminAddProduct from './AdminAddProduct';
 
 const AdminProducts = () => {
+  const navigate = useNavigate();
   const [products, setProducts] = useState();
 
   const getProducts = async () => {
@@ -17,7 +20,7 @@ const AdminProducts = () => {
 
   //Edit the user
   const handleEdit = async (id) => {
-    //
+    navigate(`/admin/updateproduct/${id}`)
   }
 
   //Delete the user
@@ -38,6 +41,7 @@ const AdminProducts = () => {
           <table>
             <thead>
               <tr>
+                <th>Product Image</th>
                 <th>Product</th>
                 <th>Edit</th>
                 <th>Delete</th>
@@ -45,7 +49,8 @@ const AdminProducts = () => {
             </thead>
             <tbody id="tbody">
               {products && products.map((product) => (
-                <tr className="userview">
+                <tr className="userview" key={product._id}>
+                  <td>{<img src={product.photos[0].image_url} alt='product' className='product-pic' />}</td>
                   <td>{product.name}</td>
                   <td><button className="edit-btn" onClick={() => { handleEdit(product._id) }}>Edit</button></td>
                   <td><button className="delete-btn" onClick={() => { handleDelete(product._id) }}>Delete</button></td>
@@ -57,7 +62,7 @@ const AdminProducts = () => {
       </div>
 
       <div className='add-collection'>
-        <button>Add new Product</button>
+        <Link to='/admin/addproduct'><button>Add new Product</button></Link>
       </div>
     </section>
   )
