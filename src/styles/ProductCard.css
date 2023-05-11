@@ -1,0 +1,84 @@
+.card {
+    margin: 15px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    line-height: 6px;
+    position: relative;
+    cursor: grab;
+}
+
+.card:hover {
+    box-shadow: 1px 2px 10px 1px gray;
+    transform: scale(1.01);
+}
+
+.image-div img {
+    width: 100%;
+    border-radius: 4px;
+}
+
+.details {
+    padding: 10px;
+}
+
+.details h2 {
+    margin: 30px 0px;
+    color: slategray;
+}
+
+.details h3 {
+    margin: 30px 0px;
+    font-size: 30px;
+}
+
+.details p {
+    font-size: medium;
+    color: #999898;
+}
+
+.cart-btn {
+    margin-top: 20px;
+    padding: 0px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cart-btn h4 {
+    font-size: large;
+    color: #456f6f;
+}
+
+.rating {
+    color: black;
+    font-weight: bold;
+}
+
+.cart-btn button {
+    padding: 7px 18px;
+    border: none;
+    background-color: darkcyan;
+    color: white;
+    font-size: medium;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card button:active {
+    transform: scale(0.97);
+}
+
+.wish {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.wish img {
+    height: 30px;
+}
+
+.wish img:active {
+    transform: scale(0.90);
+}
