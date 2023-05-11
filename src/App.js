@@ -6,6 +6,8 @@ import Home from './components/Home';
 import Footer from "./components/Footer";
 import AdminPage from "./components/AdminPage";
 import Header from "./components/Header";
+import AdminAddProduct from "./components/AdminAddProduct";
+import AdminUpdateProduct from "./components/AdminUpdateProduct";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/admin' element={<AdminPage />} />
+        <Route path='/admin/addproduct' element={<AdminAddProduct />} />
+        <Route path='/admin/updateproduct/:id' element={<AdminUpdateProduct />} />
       </Routes>
       <Footer />
     </BrowserRouter>

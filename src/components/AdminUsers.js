@@ -18,12 +18,40 @@ const AdminUsers = () => {
 
   //Edit the user
   const handleEdit = async (id) => {
-    //
+    try {
+      const newData = {
+        name: prompt("Enter new name of the user"),
+        email: prompt("Do you want to update the email?"),
+        role: prompt("Do you want to update the role as well?")
+      }
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, newData, { withCredentials: true })
+        .then(response => { return response.data })
+        .then((result) => {
+          if (result.success) {
+            window.alert(result.message)
+            // fetchUsers()
+          }
+        })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   //Delete the user
-  const handleDelete = async (userId) => {
-    //
+  const handleDelete = async (id) => {
+    try {
+      const getConfirm = window.confirm("Are you sure to delete this user?");
+      if (getConfirm===true) {
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, { withCredentials: true })
+          .then(response => {
+            if (response.data.success) {
+              window.alert(response.data.message)
+            }
+          })
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -48,7 +76,7 @@ const AdminUsers = () => {
             </thead>
             <tbody id="tbody">
               {users && users.map((user) => (
-                <tr className="userview">
+                <tr className="userview" key={user._id}>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
                   <td>0</td>

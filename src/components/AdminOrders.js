@@ -49,7 +49,7 @@ const AdminOrders = () => {
             </thead>
             <tbody id="tbody">
               {orders && orders.map((order) => (
-                <tr className="userview">
+                <tr className="userview" key={order._id}>
                   <td>{order.product}</td>
                   <td>{order.user}</td>
                   <td>{order.status}</td>

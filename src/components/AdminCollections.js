@@ -19,12 +19,54 @@ const AdminCollections = () => {
 
     //Edit the user
     const handleEdit = async (id) => {
-        //
+        try {
+            const newData = {
+                name: prompt("Enter new name of the collection")
+            }
+            await axios.put(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, newData, { withCredentials: true })
+                .then(response => { return response.data })
+                .then((result) => {
+                    if (result.success) {
+                        window.alert(result.message)
+                        // fetchUsers()
+                    }
+                })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
+
     //Delete the user
-    const handleDelete = async (userId) => {
-        //
+    const handleDelete = async (id) => {
+        try {
+            const getConfirm = window.confirm("Are you sure to delete this collection?");
+            if (getConfirm === true) {
+                await axios.delete(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, { withCredentials: true })
+                    .then(response => {
+                        if (response.data.success) {
+                            window.alert(response.data.message)
+                        }
+                    })
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //add a collection
+    const addCollection = async () => {
+        try {
+            const newCollection = { name: prompt("Enter new collection name") }
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/collection/create`, newCollection, { withCredentials: true })
+                .then(response => {
+                    if (response.data.success) {
+                        window.alert("Collection added successfully")
+                    }
+                })
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -47,7 +89,7 @@ const AdminCollections = () => {
                         </thead>
                         <tbody id="tbody">
                             {collections && collections.map((collection) => (
-                                <tr className="userview">
+                                <tr className="userview" key={collection._id}>
                                     <td>{collection.name}</td>
                                     <td><button className="edit-btn" onClick={() => { handleEdit(collection._id) }}>Edit</button></td>
                                     <td><button className="delete-btn" onClick={() => { handleDelete(collection._id) }}>Delete</button></td>
@@ -59,7 +101,7 @@ const AdminCollections = () => {
             </div>
 
             <div className='add-collection'>
-                <button>Add new Collection</button>
+                <button onClick={() => addCollection()}>Add new Collection</button>
             </div>
         </section>
     )
