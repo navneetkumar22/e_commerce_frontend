@@ -87,7 +87,7 @@ const Home = () => {
                         <p className='wish-length'>{wishlist ? (wishlist.products.length) : (0)}</p>
                     </div>
                     <div className='cart-size'>
-                        <img src={cartImage} alt='cart' />
+                        <Link to="/cart"><img src={cartImage} alt='cart' /></Link>
                         <p className='cart-length'>{cart ? (cart.products.length) : (0)}</p>
                     </div>
                 </div>

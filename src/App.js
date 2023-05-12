@@ -8,6 +8,7 @@ import AdminPage from "./components/AdminPage";
 import Header from "./components/Header";
 import AdminAddProduct from "./components/AdminAddProduct";
 import AdminUpdateProduct from "./components/AdminUpdateProduct";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/admin/addproduct' element={<AdminAddProduct />} />
         <Route path='/admin/updateproduct/:id' element={<AdminUpdateProduct />} />
