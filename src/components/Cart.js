@@ -19,12 +19,14 @@ const Cart = () => {
             await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, {
                 headers: {
                     Authorization: `Bearer ${Cookies.get('token')}`
-                  }
+                }
             })
                 .then(response => { setCart(response.data.cart.products) })
         } catch (error) {
             console.log(error);
         }
+
+        // cart.forEach(item => { console.log(item.product); })
     }
 
     // const getProductByid = (id) => {
@@ -64,7 +66,7 @@ const Cart = () => {
     useEffect(() => {
         getCart();
         // getProductByid();
-    })
+    },)
 
 
 
@@ -100,9 +102,14 @@ const Cart = () => {
             <article>
                 {
                     cart && cart?.map((item) => {
-                        // let product = [];
-                        // product = getProductByid(item._id);
-                        // console.log(typeof product);
+                        // console.log(item.product);
+                        try {
+                            axios.get(`${process.env.REACT_APP_SERVER_URL}/product/${item.product}`)
+                                .then(response => { console.log(response.data.product); })
+                                .catch(err=>{console.log(err);})
+                        } catch (error) {
+                            console.log(error);
+                        }
                         return (
                             <div className='final-cart' key={item._id} >
                                 <div className='cart-image'>

@@ -16,10 +16,6 @@ const Home = () => {
     // const [wishlist, setWishlist] = useState();
     const [collections, setCollections] = useState();
 
-    const getWishlist = async () => {
-        //
-    }
-
     const getCart = async () => {
         try {
             await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, {
@@ -60,7 +56,6 @@ const Home = () => {
 
     useEffect(() => {
         getAllCollection();
-        getWishlist();
         getCart();
     }, [])
 

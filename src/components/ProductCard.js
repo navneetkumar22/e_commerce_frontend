@@ -1,6 +1,5 @@
 import React from 'react';
 import "../styles/ProductCard.css";
-import wishlistImage from "../assets/wishList.png";
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
@@ -23,22 +22,8 @@ const ProductCard = ({ data }) => {
         }
     }
 
-    const addToWishlist = async (_id) => {
-        console.log(_id);
-        try {
-            await axios.post(`${process.env.REACT_APP_SERVER_URL}/wishlist/${_id}`, {
-                headers: {
-                    Authorization: `Bearer ${Cookies.get('token')}`
-                }
-            })
-                .then(response => { console.log(response); })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     return (
-        <div className='card reveal'>
+        <div className='card'>
             <div className='image-div'>
                 <img src={photos[0].image_url} alt='product' />
             </div>
@@ -50,9 +35,6 @@ const ProductCard = ({ data }) => {
                     <h4>Ratings:&nbsp;<span className='rating'>{ratings}</span></h4>
                     <button onClick={() => addToCart(_id)}>Add to Cart</button>
                 </div>
-            </div>
-            <div className='wish'>
-                <img src={wishlistImage} alt='addToWish' onClick={() => addToWishlist(_id)} />
             </div>
         </div>
     )

@@ -7,18 +7,6 @@
     grid-template-columns: repeat(3, auto);
 }
 
-.reveal {
-    position: relative;
-    transform: translateY(80px);
-    opacity: 0;
-    transition: 2s all ease;
-}
-
-.reveal.active {
-    transform: translateY(0);
-    opacity: 1;
-}
-
 /* products section*/
 .products {
     margin-top: 100px;
