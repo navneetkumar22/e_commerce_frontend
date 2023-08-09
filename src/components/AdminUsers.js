@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminUsers.css";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const AdminUsers = () => {
 
@@ -8,7 +9,11 @@ const AdminUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/users`, { withCredentials: true })
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/users`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('token')}`
+        }
+      })
         .then(response => { return response.data })
         .then((result) => { setUsers(result.users); })
     } catch (error) {
@@ -24,7 +29,11 @@ const AdminUsers = () => {
         email: prompt("Do you want to update the email?"),
         role: prompt("Do you want to update the role as well?")
       }
-      await axios.put(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, newData, { withCredentials: true })
+      await axios.put(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, newData, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('token')}`
+        }
+      })
         .then(response => { return response.data })
         .then((result) => {
           if (result.success) {
@@ -41,8 +50,12 @@ const AdminUsers = () => {
   const handleDelete = async (id) => {
     try {
       const getConfirm = window.confirm("Are you sure to delete this user?");
-      if (getConfirm===true) {
-        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, { withCredentials: true })
+      if (getConfirm === true) {
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/admin/user/${id}`, {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('token')}`
+          }
+        })
           .then(response => {
             if (response.data.success) {
               window.alert(response.data.message)
@@ -92,4 +105,4 @@ const AdminUsers = () => {
   )
 }
 
-export default AdminUsers
+export default AdminUsers;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminOrders.css";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const AdminOrders = () => {
 
@@ -8,7 +9,11 @@ const AdminOrders = () => {
 
   const allOrders = async () => {
     try {
-      await axios.get(`${process.env.REACT_APP_SERVER_URL}/order/all`, { withCredentials: true })
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/order/all`, {
+        headers: {
+          Authorization: `Bearer ${Cookies.get('token')}`
+        }
+      })
         .then(response => { return response.data })
         .then((result) => { setOrders(result.orders); })
     } catch (error) {

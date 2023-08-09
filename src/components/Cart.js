@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import forkImage from "../assets/forkImage.png";
 import wishlistImage from "../assets/wishList.png";
 import cartImage from "../assets/cartImage.png";
+import Cookies from 'js-cookie';
 
 const Cart = () => {
 
@@ -15,7 +16,11 @@ const Cart = () => {
 
     const getCart = async () => {
         try {
-            await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, { withCredentials: true })
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                  }
+            })
                 .then(response => { setCart(response.data.cart.products) })
         } catch (error) {
             console.log(error);

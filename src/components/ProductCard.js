@@ -2,6 +2,7 @@ import React from 'react';
 import "../styles/ProductCard.css";
 import wishlistImage from "../assets/wishList.png";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const ProductCard = ({ data }) => {
 
@@ -11,7 +12,11 @@ const ProductCard = ({ data }) => {
     const addToCart = async (id) => {
         try {
             const quantity = 1;
-            await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/add/${id}`, quantity, { withCredentials: true })
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/add/${id}`, quantity, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
                 .then(response => { console.log(response); })
         } catch (error) {
             console.log(error);
@@ -21,7 +26,11 @@ const ProductCard = ({ data }) => {
     const addToWishlist = async (_id) => {
         console.log(_id);
         try {
-            await axios.post(`${process.env.REACT_APP_SERVER_URL}/wishlist/${_id}`, { withCredentials: true })
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/wishlist/${_id}`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
                 .then(response => { console.log(response); })
         } catch (error) {
             console.log(error);

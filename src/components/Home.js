@@ -8,31 +8,31 @@ import cartImage from "../assets/cartImage.png";
 import menuIcon from "../assets/whiteMenu.png";
 import Banner from './ImageContainer';
 import Categories from './Categories';
+import Cookies from 'js-cookie';
 
 const Home = () => {
 
     const [cart, setCart] = useState();
-    const [wishlist, setWishlist] = useState();
+    // const [wishlist, setWishlist] = useState();
+    const [collections, setCollections] = useState();
 
     const getWishlist = async () => {
-        try {
-            await axios.get(`${process.env.REACT_APP_SERVER_URL}/wishlist`, { withCredentials: true })
-                .then(response => { setWishlist(response.data.wishList) })
-        } catch (error) {
-            console.log(error);
-        }
+        //
     }
 
     const getCart = async () => {
         try {
-            await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, { withCredentials: true })
+            await axios.get(`${process.env.REACT_APP_SERVER_URL}/cart`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
                 .then(response => { setCart(response.data.cart) })
         } catch (error) {
             console.log(error);
         }
     }
 
-    const [collections, setCollections] = useState();
 
     const getAllCollection = async () => {
         try {
@@ -62,7 +62,7 @@ const Home = () => {
         getAllCollection();
         getWishlist();
         getCart();
-    })
+    }, [])
 
     return (
         <>
@@ -84,7 +84,7 @@ const Home = () => {
                 <div className='cart-div'>
                     <div className='wish-size'>
                         <img src={wishlistImage} alt='wishlist' />
-                        <p className='wish-length'>{wishlist ? (wishlist.products.length) : (0)}</p>
+                        <p className='wish-length'>0</p>
                     </div>
                     <div className='cart-size'>
                         <Link to="/cart"><img src={cartImage} alt='cart' /></Link>

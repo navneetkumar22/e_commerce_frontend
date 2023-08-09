@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../styles/AdminCollections.css";
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const AdminCollections = () => {
 
@@ -23,7 +24,11 @@ const AdminCollections = () => {
             const newData = {
                 name: prompt("Enter new name of the collection")
             }
-            await axios.put(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, newData, { withCredentials: true })
+            await axios.put(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, newData, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
                 .then(response => { return response.data })
                 .then((result) => {
                     if (result.success) {
@@ -42,7 +47,11 @@ const AdminCollections = () => {
         try {
             const getConfirm = window.confirm("Are you sure to delete this collection?");
             if (getConfirm === true) {
-                await axios.delete(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, { withCredentials: true })
+                await axios.delete(`${process.env.REACT_APP_SERVER_URL}/collection/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${Cookies.get('token')}`
+                    }
+                })
                     .then(response => {
                         if (response.data.success) {
                             window.alert(response.data.message)
@@ -58,7 +67,11 @@ const AdminCollections = () => {
     const addCollection = async () => {
         try {
             const newCollection = { name: prompt("Enter new collection name") }
-            await axios.post(`${process.env.REACT_APP_SERVER_URL}/collection/create`, newCollection, { withCredentials: true })
+            await axios.post(`${process.env.REACT_APP_SERVER_URL}/collection/create`, newCollection, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
                 .then(response => {
                     if (response.data.success) {
                         window.alert("Collection added successfully")

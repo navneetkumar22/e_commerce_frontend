@@ -6,7 +6,7 @@ import ProductCard from './ProductCard';
 const Categories = () => {
 
     const [collections, setCollections] = useState();
-    const [selectedLink, setSelectedLink] = useState();
+    const [selectedLink, setSelectedLink] = useState("Fresh Fruits");
     const [products, setProducts] = useState();
 
     const getAllCollection = async () => {
