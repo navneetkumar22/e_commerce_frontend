@@ -29,24 +29,19 @@ const Cart = () => {
         // cart.forEach(item => { console.log(item.product); })
     }
 
-    // const getProductByid = (id) => {
-    //     axios.get(`${process.env.REACT_APP_SERVER_URL}/product/${id}`)
-    //         .then(response => { setProduct(response.data.product); console.log(response.data.product); })
-    //         .catch(error => { console.log(error); })
-    // };
-
-    //function to set the total price
-    // const handlePrice = () => {
-    //     let value = 0;
-    //     cart.map((item) => (
-    //         value = value + item.amount * item.price
-    //     ))
-    //     setPrice(value);
-    // }
-
     //function to remove item from cart
-    const removeProduct = (id) => {
-        //
+    const removeProduct = async (id) => {
+        try {
+            await axios.delete(`${process.env.REACT_APP_SERVER_URL}/cart/delete/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
+                .then(resp => { console.log(resp); })
+            getCart();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //function to change the product amount
@@ -102,19 +97,12 @@ const Cart = () => {
             <article>
                 {
                     cart && cart?.map((item) => {
-                        // console.log(item.product);
-                        try {
-                            axios.get(`${process.env.REACT_APP_SERVER_URL}/product/${item.product}`)
-                                .then(response => { console.log(response.data.product); })
-                                .catch(err=>{console.log(err);})
-                        } catch (error) {
-                            console.log(error);
-                        }
+
                         return (
                             <div className='final-cart' key={item._id} >
                                 <div className='cart-image'>
                                     <img src={''} alt='' />
-                                    <h2>{item._id}</h2>
+                                    <h2>product name</h2>
                                 </div>
                                 <div className='number'>
                                     <button onClick={() => changeAmount(item, +1)}>+</button>
@@ -126,7 +114,6 @@ const Cart = () => {
                                     <button onClick={() => removeProduct(item._id)}>Remove</button>
                                 </div>
                             </div>
-
                         )
                     })
                 }

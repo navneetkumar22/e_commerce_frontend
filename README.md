@@ -37,7 +37,6 @@ It enables the user to browse through products, and and remove from products fro
 <br>
 
 ## **Deployed Link :**
-Cuurently this project is under development.
-Deployed link will be available soon.
+<a href="https://freshfoodstore.netlify.app"><img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white"/></a>
 
 <br>
