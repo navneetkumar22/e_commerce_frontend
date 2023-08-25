@@ -9,6 +9,7 @@ import menuIcon from "../assets/whiteMenu.png";
 import Banner from './ImageContainer';
 import Categories from './Categories';
 import Cookies from 'js-cookie';
+// import Spinner from './Spinner';
 
 const Home = () => {
 

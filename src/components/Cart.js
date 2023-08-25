@@ -11,8 +11,7 @@ const Cart = () => {
 
 
     const [cart, setCart] = useState();
-    // const [product, setProduct] = useState();
-    // const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(0);
 
     const getCart = async () => {
         try {
@@ -21,12 +20,13 @@ const Cart = () => {
                     Authorization: `Bearer ${Cookies.get('token')}`
                 }
             })
-                .then(response => { setCart(response.data.cart.products) })
+                .then(response => {
+                    // console.log(response.data.cart.products);
+                    setCart(response.data.cart.products)
+                })
         } catch (error) {
             console.log(error);
         }
-
-        // cart.forEach(item => { console.log(item.product); })
     }
 
     //function to remove item from cart
@@ -44,23 +44,20 @@ const Cart = () => {
         }
     }
 
-    //function to change the product amount
-    const changeAmount = (item, quantity) => {
-        // cart.forEach((product, index, cart) => {
-        //     if (product.id === item.id) {
-        //         cart[index].amount += quantity;
-
-        //         if (cart[index].amount < 1)
-        //             cart[index].amount = 1;
-
-        //         setCart([...cart])
-        //     }
-        // });
+    //function to handle total price
+    const totalPrice = () => {
+        let totalPrice = 0;
+        if (cart !== undefined) {
+            for (let i = 0; i < cart.length; i++) {
+                totalPrice += cart[i].product.price;
+            }
+        }
+        setPrice(totalPrice);
     }
 
     useEffect(() => {
         getCart();
-        // getProductByid();
+        totalPrice();
     },)
 
 
@@ -97,20 +94,19 @@ const Cart = () => {
             <article>
                 {
                     cart && cart?.map((item) => {
-
                         return (
                             <div className='final-cart' key={item._id} >
                                 <div className='cart-image'>
-                                    <img src={''} alt='' />
-                                    <h2>product name</h2>
+                                    <img src={`${item.product.photos[0].image_url}`} alt='' />
+                                    <h2>{item.product.name}</h2>
                                 </div>
                                 <div className='number'>
-                                    <button onClick={() => changeAmount(item, +1)}>+</button>
+                                    <button>+</button>
                                     <button>{item.quantity}</button>
-                                    <button onClick={() => changeAmount(item, -1)}>-</button>
+                                    <button>-</button>
                                 </div>
                                 <div className='item-price'>
-                                    <h3><span className='rupee'>&#8377;</span>99</h3>
+                                    <h3><span className='rupee'>&#8377;</span>{item.product.price}</h3>
                                     <button onClick={() => removeProduct(item._id)}>Remove</button>
                                 </div>
                             </div>
@@ -120,7 +116,7 @@ const Cart = () => {
 
                 <div className='final-price'>
                     <h2>Total amount =</h2>
-                    <h2><span className='rupee'>&#8377;</span>999</h2>
+                    <h2><span className='rupee'>&#8377;</span>{price}</h2>
                     <button>Checkout</button>
                 </div>
             </article>
