@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import AdminAddProduct from "./components/AdminAddProduct";
 import AdminUpdateProduct from "./components/AdminUpdateProduct";
 import Cart from "./components/Cart";
+import ViewProduct from "./components/ViewProduct";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/admin' element={<AdminPage />} />
         <Route path='/admin/addproduct' element={<AdminAddProduct />} />
         <Route path='/admin/updateproduct/:id' element={<AdminUpdateProduct />} />
+        <Route path='/product/:id' element={<ViewProduct />} />
       </Routes>
       <Footer />
     </BrowserRouter>
