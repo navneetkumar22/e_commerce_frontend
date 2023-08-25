@@ -21,6 +21,7 @@ const Categories = () => {
     }
 
     const getAllProducts = async () => {
+        setSelectedLink("All Products");
         try {
             setLoading(true);
             await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/all`)
@@ -29,12 +30,12 @@ const Categories = () => {
         } catch (error) {
             console.log(error);
         }
-        setSelectedLink("All Products");
     }
 
 
 
     const getProducts = async (id, productName) => {
+        setSelectedLink(productName);
         try {
             setLoading(true);
             await axios.get(`${process.env.REACT_APP_SERVER_URL}/products/collection/${id}`)
@@ -43,14 +44,13 @@ const Categories = () => {
         } catch (error) {
             console.log(error);
         }
-        setSelectedLink(productName);
     }
 
     useEffect(() => {
         getAllCollection();
         getAllProducts();
         // setLoading(false)
-    },[])
+    }, [])
 
     return (
         <section className='product-section'>

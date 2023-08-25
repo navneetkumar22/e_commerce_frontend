@@ -71,10 +71,10 @@ const Home = () => {
                 <div className='nav-div'>
                     <ul>
                         <Link to="/"><li>HOME</li></Link>
-                        <Link to="/profile"><li>PROFILE</li></Link>
+                        <Link to="/"><li>PROFILE</li></Link>
                         <Link to=""><li onClick={productSection}>PRODUCTS</li></Link>
-                        <Link to="/about"><li>ABOUT US</li></Link>
-                        <Link to="/contact"><li>CONTACT US</li></Link>
+                        <Link to="/"><li>ABOUT US</li></Link>
+                        <Link to="/"><li>CONTACT US</li></Link>
                     </ul>
                 </div>
                 <div className='cart-div'>

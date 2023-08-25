@@ -1,5 +1,5 @@
 .card {
-    margin: 15px;
+    margin: 10px;
     background-color: #f4f4fb;
     border-radius: 4px;
     line-height: 6px;
@@ -14,8 +14,12 @@
     border: none;
 }
 
+.image-div {
+    text-align: center;
+}
+
 .image-div img {
-    width: 100%;
+    width: 80%;
     border-radius: 4px;
 }
 
@@ -24,17 +28,19 @@
 }
 
 .details h2 {
+    font-size: medium;
     margin: 30px 0px;
     color: slategray;
 }
 
 .details h3 {
-    margin: 30px 0px;
-    font-size: 30px;
+    margin: 25px 0px;
+    font-size: 20px;
 }
 
 .details p {
-    font-size: medium;
+    font-size: small;
+    line-height: normal;
     color: #999898;
 }
 
@@ -47,7 +53,7 @@
 }
 
 .cart-btn h4 {
-    font-size: large;
+    font-size: small;
     color: #456f6f;
 }
 
@@ -57,11 +63,11 @@
 }
 
 .cart-btn button {
-    padding: 7px 18px;
+    padding: 5px auto;
     border: none;
     background-color: darkcyan;
     color: white;
-    font-size: medium;
+    font-size: 12px;
     border-radius: 4px;
     cursor: pointer;
 }
