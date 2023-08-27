@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import forkImage from "../assets/forkImage.png";
 import Cookies from 'js-cookie';
+import Spinner from './Spinner';
 const server = process.env.REACT_APP_SERVER_URL;
 
 const Login = () => {
@@ -11,10 +12,12 @@ const Login = () => {
 
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const submitData = async () => {
         const data = { email: userEmail, password: userPassword };
         try {
+            setLoading(true);
             await axios.post(`${server}/login`, data)
                 .then(response => { return response.data })
                 .then((result) => {
@@ -23,7 +26,8 @@ const Login = () => {
                         Cookies.set('token', result.token)
                         Cookies.set('name', result.user.name)
                         Cookies.set('role', result.user.role)
-                        window.alert("You are logged in successsfully!")
+                        // window.alert("You are logged in successsfully!")
+                        setLoading(false);
                         navigate('/');
                     }
                 })
@@ -58,22 +62,25 @@ const Login = () => {
                 <div style={{ width: '80px' }}></div>
             </section>
 
-            <section>
-                <div className='login-div'>
-                    <div className="form-div">
-                        <h1>Login</h1>
-                        <form className='login-form' action="" >
-                            <input type="email" name="email" id="email" placeholder='Email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
-                            <input type="password" name="password" id="password" placeholder='Password' value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
-                            <button type="submit" onClick={loginUser}>Submit</button>
-                        </form>
-                        <h4>Don't have an account?</h4>
-                        <div className="social">
-                            <Link to="/signup"><button className='register'>Create an account</button></Link>
+            {loading ? <Spinner /> : (
+
+                <section>
+                    <div className='login-div'>
+                        <div className="form-div">
+                            <h1>Login</h1>
+                            <form className='login-form' action="" >
+                                <input type="email" name="email" id="email" placeholder='Email' value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
+                                <input type="password" name="password" id="password" placeholder='Password' value={userPassword} onChange={(e) => setUserPassword(e.target.value)} />
+                                <button type="submit" onClick={loginUser}>Submit</button>
+                            </form>
+                            <h4>Don't have an account?</h4>
+                            <div className="social">
+                                <Link to="/signup"><button className='register'>Create an account</button></Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
         </>
     )
 }

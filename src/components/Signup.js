@@ -4,23 +4,27 @@ import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import forkImage from "../assets/forkImage.png";
 import Cookies from 'js-cookie';
+import Spinner from './Spinner';
 
 const Signup = () => {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('')
     const [userEmail, setUserEmail] = useState('')
     const [userPassword, setUserPassword] = useState('')
+    const [loading, setLoading] = useState(false);
 
     const submitData = async () => {
         const data = { name: userName, email: userEmail, password: userPassword };
         try {
+            setLoading(true);
             await axios.post(`${process.env.REACT_APP_SERVER_URL}/signup`, data)
                 .then(response => { return response.data })
                 .then((result) => {
                     if (result.success) {
                         Cookies.set('token', result.token)
                         Cookies.set('name', result.user.name)
-                        window.alert("You are successfully registered!");
+                        // window.alert("You are successfully registered!");
+                        setLoading(false);
                         navigate('/');
                     }
                 })
@@ -59,23 +63,26 @@ const Signup = () => {
                 <div style={{ width: '80px' }}></div>
             </section>
 
-            <section>
-                <div className='login-div'>
-                    <div className="form-div">
-                        <h1>Sign Up</h1>
-                        <form className='login-form' onSubmit={signUpUser}>
-                            <input type="text" id='name' name='name' placeholder='Name' value={userName} onChange={(e) => { setUserName(e.target.value) }} />
-                            <input type="email" id='email' name='email' placeholder='Email' value={userEmail} onChange={(e) => { setUserEmail(e.target.value) }} />
-                            <input type="password" id='password' name='password' placeholder='Password' value={userPassword} onChange={(e) => { setUserPassword(e.target.value) }} />
-                            <button type='submit'>Submit</button>
-                        </form>
-                        <h4>Already have an account?</h4>
-                        <div className="social">
-                            <Link to="/login"><button className='register'>Login</button></Link>
+            {loading ? <Spinner /> : (
+
+                <section>
+                    <div className='login-div'>
+                        <div className="form-div">
+                            <h1>Sign Up</h1>
+                            <form className='login-form' onSubmit={signUpUser}>
+                                <input type="text" id='name' name='name' placeholder='Name' value={userName} onChange={(e) => { setUserName(e.target.value) }} />
+                                <input type="email" id='email' name='email' placeholder='Email' value={userEmail} onChange={(e) => { setUserEmail(e.target.value) }} />
+                                <input type="password" id='password' name='password' placeholder='Password' value={userPassword} onChange={(e) => { setUserPassword(e.target.value) }} />
+                                <button type='submit'>Submit</button>
+                            </form>
+                            <h4>Already have an account?</h4>
+                            <div className="social">
+                                <Link to="/login"><button className='register'>Login</button></Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            )}
         </>
     )
 }

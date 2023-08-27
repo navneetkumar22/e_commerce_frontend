@@ -2,20 +2,24 @@ import React, { useEffect, useState } from 'react';
 import "../styles/AdminUsers.css";
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import Spinner from './Spinner';
 
 const AdminUsers = () => {
 
   const [users, setUsers] = useState();
+  const [loading, setLoading] = useState(false);
 
   const fetchUsers = async () => {
     try {
+      setLoading(true);
       await axios.get(`${process.env.REACT_APP_SERVER_URL}/admin/users`, {
         headers: {
           Authorization: `Bearer ${Cookies.get('token')}`
         }
       })
         .then(response => { return response.data })
-        .then((result) => { setUsers(result.users); })
+        .then((result) => { setUsers(result.users); setLoading(false); })
+
     } catch (error) {
       console.log(error);
     }
@@ -69,38 +73,43 @@ const AdminUsers = () => {
 
   useEffect(() => {
     fetchUsers();
-  })
+  }, [])
+
 
   return (
     <section className="user-data">
-      <div className="data">
-        <h2 id="heading">Users</h2>
+      {loading ? <Spinner /> : (
+        <div className="data">
+          <h2 id="heading">Users</h2>
 
-        <div className="table-data">
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Orders</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody id="tbody">
-              {users && users.map((user) => (
-                <tr className="userview" key={user._id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>0</td>
-                  <td><button className="edit-btn" onClick={() => { handleEdit(user._id) }}>Edit</button></td>
-                  <td><button className="delete-btn" onClick={() => { handleDelete(user._id) }}>Delete</button></td>
+          <div className="table-data">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Orders</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+
+              <tbody id="tbody">
+                {users && users.map((user) => (
+                  <tr className="userview" key={user._id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>0</td>
+                    <td><button className="edit-btn" onClick={() => { handleEdit(user._id) }}>Edit</button></td>
+                    <td><button className="delete-btn" onClick={() => { handleDelete(user._id) }}>Delete</button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
     </section>
   )
 }
